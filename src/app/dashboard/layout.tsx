@@ -7,7 +7,7 @@ export default function DashboardLayout({children}: {children: ReactNode}) {
     <Sidebar/>
     <div>
     <header>Header</header>
-    <div>Asosiy</div>
+    <div>Rooms</div>
     </div>
   </div>
 }
