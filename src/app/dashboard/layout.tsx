@@ -1,4 +1,5 @@
-import NavbarTitle from "@/components/common/NavbarTitle/NavbarTitle";
+import { ThemeProvider } from "@/components/common/RoomsModal/ThemeProvider/ThemeProvider";
+import Navbar from "@/components/layouts/Navbar/Navbar";
 import Sidebar from "@/components/layouts/Sidebar/Sidebar";
 import { ReactNode } from "react";
 
@@ -7,8 +8,16 @@ export default function DashboardLayout({children}: {children: ReactNode}) {
   return <div className="w-full h-full flex">
     <Sidebar/>
     <div className="grow flex flex-col">
-    <NavbarTitle/>
-    <main className="grow  overflow-y-auto py-4 px-4">{children}</main>
+     <Navbar/>
+    <main className="grow  overflow-y-auto py-4 px-4">
+      <ThemeProvider 
+       attribute={"class"}
+       defaultTheme="dark"
+       disableTransitionOnChange
+       >
+        {children}
+        </ThemeProvider>
+      </main>
     </div>
   </div>
 }

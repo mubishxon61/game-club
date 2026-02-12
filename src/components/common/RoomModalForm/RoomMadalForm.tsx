@@ -19,23 +19,25 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import z from "zod"
 import { Dispatch, SetStateAction } from "react"
+import { useSetRooms } from "@/hooks/useSetRooms"
 
 
 const roomSchema = z.object({
     name: z.string().min(2, "Kamida ikkita harf bo'lishi kerak!").max(20, "Xona nomi 20 harfdan kam bo'lsin!"),
     price: z.number("Raqam bo'lishi shart!").min(5000, "Kamida 5000 so'm bo'lishi kerak!").max(100000, "Narx xato kiritdingiz!")
 })
-type TRoom = z.infer<typeof roomSchema>
+export  type TRoom = z.infer<typeof roomSchema>
 type Props = {
     setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 function RoomMadalForm({setShowModal} : Props) {
+  const { setRoom } = useSetRooms()
         const {register, handleSubmit,reset, formState: {errors}}= useForm<TRoom>({
         resolver: zodResolver(roomSchema)
     })
     const onSubmit = (room: TRoom) => {
-    console.log(room); 
+    setRoom(room)
     reset()
     setShowModal(false)
     }
